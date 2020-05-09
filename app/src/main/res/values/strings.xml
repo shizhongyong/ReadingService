@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">点读消息</string>
+    <string name="description">通过点击阅读消息</string>
+
+    <string name="permission_granted">权限获取成功</string>
+    <string name="permission_denied">权限获取失败</string>
+</resources>
