@@ -105,8 +105,9 @@ public class ReadingService extends AccessibilityService {
         if (eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             if (TextUtils.equals(event.getClassName(), CLASS_NAME_PREVIEW_ACTIVITY)) {// 消息预览
                 AccessibilityNodeInfo node = findTextViewNodeInfo(getRootInActiveWindow());
-                if (node != null) {
-                    Log.e("shizy", "text: " + node.getText());
+                if (node != null && node.getText() != null) {
+//                    Log.e("shizy", "text: " + node.getText());
+                    speak(node.getText().toString());
                 }
             }
         }
@@ -138,7 +139,7 @@ public class ReadingService extends AccessibilityService {
         // 此处可以改为 含有您业务逻辑的SpeechSynthesizerListener的实现类
         SpeechSynthesizerListener listener = new UiMessageListener(mainHandler);
         InitConfig config = getInitConfig(listener);
-        synthesizer = new MySyntherizer(this, config, mainHandler); // 此处可以改为MySyntherizer 了解调用过程
+        synthesizer = new NonBlockSyntherizer(this, config, mainHandler); // 此处可以改为MySyntherizer 了解调用过程
     }
 
     protected Map<String, String> getParams() {
